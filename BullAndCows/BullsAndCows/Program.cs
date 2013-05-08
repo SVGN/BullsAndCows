@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace BullsCows
+namespace BullsAndCows
 {
-//tova mie purvata Csharp programa v jivota
-// obache dobre stana .i ba4ka na 100%
+
     class Program
     {
-        
-
-
-
         static void WriteAbout()
         {
             Console.WriteLine("Welcome to “Bulls and Cows” game. Please try to guess my secret 4-digit number.");
@@ -62,9 +57,6 @@ namespace BullsCows
                 for (int d = 0; d < 10; d++)
                     digs[d] = 0;
 
-
-
-
                 for (int i = 0; i < 4; i++)
                     if (!isBull[i])
                         digs[snum[i] - '0']++;
@@ -79,9 +71,6 @@ namespace BullsCows
                             digs[sguess[i] - '0']--;
                         }
                     }
-
-
-
                 }
 
                 Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}", bulls, cows);
@@ -99,9 +88,6 @@ namespace BullsCows
                 foreach (var t in klasirane)
                 {
                     Console.WriteLine("{0}. {1} --> {2} guesses", i, t.Value, t.Key);
-
-
-
                 }
             }
             else
@@ -138,9 +124,6 @@ namespace BullsCows
         {
             Console.WriteLine("Enter your guess or command: ");
 
-
-
-
             string line = Console.ReadLine().Trim();
             Regex patt = new Regex("[1-9][0-9][0-9][0-9]");
                     
@@ -148,22 +131,15 @@ namespace BullsCows
             {
                 case "top":
                     DisplayTop();    
-                    break;
-                
+                    break;               
                 case "restart":
                     StartNewGame();
-                    break;
-                
+                    break;                
                 case "help":
-
-
-
                     Cheat();
-                    break;
-                
+                    break;              
                 case "exit":
                     return false;
-
                 default:
                     if (patt.IsMatch(line))
                     {
@@ -177,7 +153,6 @@ namespace BullsCows
                     }
                     break;
             }
-
             return true;
         }
 
