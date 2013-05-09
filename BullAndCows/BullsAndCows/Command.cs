@@ -2,6 +2,6 @@
 {
     public enum Command
     {
-        top, restart, help, exit
+        Top, Restart, Help, Exit
     };
 }

@@ -27,25 +27,30 @@ namespace BullsAndCows
         {
             Console.WriteLine("Enter your guess or command: ");
             string line = Console.ReadLine().Trim();
+            if(char.IsLower(line[0]))
+            {
+                char.ToUpper(line[0]);
+            }
+
             Regex patt = new Regex("[1-9][0-9][0-9][0-9]");
             Command command;
             if (Enum.TryParse(line, out command))
             {
                 switch (command)
                 {
-                    case Command.top:
+                    case Command.Top:
                         scoreBoard.Show();
                         break;
 
-                    case Command.restart:
+                    case Command.Restart:
                         this.StartNewGame();
                         break;
 
-                    case Command.help:
+                    case Command.Help:
                         this.Help();
                         break;
 
-                    case Command.exit:
+                    case Command.Exit:
                         return false;
                 }
             }
