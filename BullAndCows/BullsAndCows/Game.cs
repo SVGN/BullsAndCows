@@ -34,7 +34,14 @@ namespace BullsAndCows
 
             Regex patt = new Regex("[1-9][0-9][0-9][0-9]");
             Command command;
-            if (Enum.TryParse(line, out command))
+            bool isParsed = Enum.TryParse(line, out command);
+            if (command != Command.Exit && command != Command.Help && 
+                command != Command.Restart && command != Command.Top)
+            {
+                isParsed = false;
+            }
+
+            if (isParsed)
             {
                 switch (command)
                 {
