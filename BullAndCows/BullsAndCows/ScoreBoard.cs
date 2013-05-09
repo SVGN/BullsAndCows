@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BullsAndCows
 {
     class ScoreBoard
     {
-        static SortedList<int, string> scoreBoard = new SortedList<int, string>();
+        readonly static SortedList<int, string> scoreBoard = new SortedList<int, string>();
 
         public static void TryAddToScoreboard(int attempts)
         {

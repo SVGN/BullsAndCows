@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace BullsAndCows
 {
@@ -12,7 +9,7 @@ namespace BullsAndCows
         static int secretNumber;
         static bool useHelp;
         static int attempts;
-        static Random randomNumber = new Random();
+        readonly static Random randomNumber = new Random();
 
         public static bool ReadAction()
         {
