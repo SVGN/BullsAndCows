@@ -4,41 +4,47 @@ using System.Linq;
 
 namespace BullsAndCows
 {
-    class ScoreBoard
+    public class ScoreBoard
     {
-        readonly static SortedList<int, string> scoreBoard = new SortedList<int, string>();
+        private const int PlayersToShow = 5;
+        private readonly SortedList<int, string> ranking = new SortedList<int, string>();
 
-        public static void TryAddToScoreboard(int attempts)
+        public ScoreBoard()
         {
-            if (scoreBoard.Count < 5 || scoreBoard.ElementAt(4).Key > attempts)
-            {
-                Console.WriteLine("Please enter your name for the top scoreboard: ");
-                string name = Console.ReadLine().Trim();
-
-                scoreBoard.Add(attempts, name);
-                if (scoreBoard.Count == 6)
-                    scoreBoard.RemoveAt(5);
-
-                DisplayTop();
-            }
         }
 
-        public static void DisplayTop()
+        public void Show()
         {
-            if (scoreBoard.Count() > 0)
+            if (this.ranking.Count() > 0)
             {
                 Console.WriteLine("Scoreboard:");
+                
                 int position = 1;
-                foreach (var score in scoreBoard)
+                foreach (var player in this.ranking)
                 {
-                    Console.WriteLine("{0}. {1} --> {2} guesses", position, score.Value, score.Key);
-                    position++;
+                    if (position <= PlayersToShow)
+                    {
+                        Console.WriteLine("{0}. {1} --> {2} guesses", position, player.Value, player.Key);
+                        position++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
             else
             {
                 Console.WriteLine("Top scoreboard is empty.");
             }
+        }
+
+        public void AddPlayer(int score)
+        {
+            Console.WriteLine("Please enter your name for the top scoreboard: ");
+            string name = Console.ReadLine().Trim();
+
+            this.ranking.Add(score, name);
         }
     }
 }
