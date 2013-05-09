@@ -29,7 +29,7 @@ namespace BullsAndCows
             string line = Console.ReadLine().Trim();
             if(char.IsLower(line[0]))
             {
-                char.ToUpper(line[0]);
+                line = char.ToUpper(line[0]).ToString() + line.Substring(1);
             }
 
             Regex patt = new Regex("[1-9][0-9][0-9][0-9]");
