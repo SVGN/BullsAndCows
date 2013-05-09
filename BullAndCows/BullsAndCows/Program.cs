@@ -7,10 +7,8 @@ namespace BullsAndCows
     {      
          static void Main(string[] args)
          {
-             Play.StartNewGame();
-             while (Play.ReadAction())
-             {
-             }
+             Game game = new Game();
+             game.StartNewGame();
          }
     }
     
