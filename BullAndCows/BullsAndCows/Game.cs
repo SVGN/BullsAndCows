@@ -4,10 +4,6 @@ using System.Text.RegularExpressions;
 
 namespace BullsAndCows
 {
-    public enum Command
-    {
-        top, restart, help, exit
-    };
     public class Game
     {
         private readonly Random randomNumber;
