@@ -7,7 +7,7 @@ namespace BullsAndCows
     public class ScoreBoard
     {
         private const int PlayersToShow = 5;
-        private readonly SortedList<int, string> ranking = new SortedList<int, string>();
+        private readonly List<Player> ranking = new List<Player>();
 
         public ScoreBoard()
         {
@@ -24,7 +24,7 @@ namespace BullsAndCows
                 {
                     if (position <= PlayersToShow)
                     {
-                        Console.WriteLine("{0}. {1} --> {2} guesses", position, player.Value, player.Key);
+                        Console.WriteLine("{0}. {1}",position, player);
                         position++;
                     }
                     else
@@ -39,12 +39,15 @@ namespace BullsAndCows
             }
         }
 
-        public void AddPlayer(int score)
+        public void AddPlayer(Player player)
         {
-            Console.WriteLine("Please enter your name for the top scoreboard: ");
-            string name = Console.ReadLine().Trim();
+            this.ranking.Add(player);
+            this.SortRanking();
+        }
 
-            this.ranking.Add(score, name);
+        public void SortRanking()
+        {
+            this.ranking.Sort((x,y) => x.CompareTo(y));
         }
     }
 }
