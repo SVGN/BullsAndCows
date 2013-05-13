@@ -112,10 +112,10 @@ namespace BullsAndCows
         {
             this.PrintWelcomeSign();
 
-            secretNumber = Generator.SecretNumber();
-            usedCheat = false;
-            isGameOver = false;
-            attemptsCount = 1;
+            this.secretNumber = Generator.SecretNumber();
+            this.usedCheat = false;
+            this.isGameOver = false;
+            this.attemptsCount = 1;
         }
 
         private void Help()
