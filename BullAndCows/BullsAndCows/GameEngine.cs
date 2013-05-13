@@ -8,82 +8,120 @@ namespace BullsAndCows
     {
         private int secretNumber;
         private bool usedCheat;
+        private bool isGameOver;
         private int attemptsCount;
         private string helpCharecters;
         private ScoreBoard scoreBoard;
+        private Command currentCommand;
 
         public GameEngine()
         {
             this.secretNumber = Generator.SecretNumber();
             this.usedCheat = false;
-            this.attemptsCount = 0;
+            this.isGameOver = false;
+            this.attemptsCount = 1;
             this.helpCharecters = "XXXX";
             this.scoreBoard = new ScoreBoard();
         }
 
-        private bool ReadAction()
+        private bool IsGuess(string input)
+        {
+            if (input == null || input.Length != 4)
+            {
+                return false;
+            }
+
+            Regex pattern = new Regex("[1-9][0-9][0-9][0-9]");
+            return pattern.IsMatch(input);
+        }
+
+        private bool IsCommand(string input)
+        {
+            if (input == null || input.Length == 0)
+            {
+                return false;
+            }
+
+            string uppedFirstChar = string.Empty;
+            if (char.IsLower(input[0]))
+            {
+                uppedFirstChar = char.ToUpper(input[0]).ToString() + input.Substring(1);
+            }
+
+            bool isCommand = Enum.TryParse(uppedFirstChar, out currentCommand);
+            return isCommand;
+        }
+
+        private void ReadAction()
         {
             Console.WriteLine("Enter your guess or command: ");
-            string line = Console.ReadLine().Trim();
-            if(char.IsLower(line[0]))
-            {
-                line = char.ToUpper(line[0]).ToString() + line.Substring(1);
-            }
+            string input = Console.ReadLine().Trim();
 
-            Regex patt = new Regex("[1-9][0-9][0-9][0-9]");
-            Command command;
-            bool isParsed = Enum.TryParse(line, out command);
-            if (command != Command.Exit && command != Command.Help && 
-                command != Command.Restart && command != Command.Top)
+            if (this.IsGuess(input))
             {
-                isParsed = false;
+                int guess = int.Parse(input);
+                this.ProcessGuess(guess);
             }
-
-            if (isParsed)
+            else if (this.IsCommand(input))
             {
-                switch (command)
+                switch (this.currentCommand)
                 {
                     case Command.Top:
-                        scoreBoard.Show();
-                        break;
+                        {
+                            this.scoreBoard.Show();
+                            break;
+                        }
 
                     case Command.Restart:
-                        this.StartNewGame();
-                        break;
+                        {
+                            this.StartNewGame();
+                            break;
+                        }
 
                     case Command.Help:
-                        this.Help();
-                        break;
+                        {
+                            this.Help();
+                            break;
+                        }
 
                     case Command.Exit:
-                        return false;
+                        {
+                            isGameOver = true;
+                            break;
+                        }
                 }
-            }
-            else if (patt.IsMatch(line))
-            {
-                int guess = int.Parse(line);
-                this.ProcessGuess(guess);
             }
             else
             {
                 Console.WriteLine("Please enter a 4-digit number or");
                 Console.WriteLine("one of the commands: 'top', 'restart', 'help' or 'exit'.");
             }
-            return true;
         }
 
-        public void StartNewGame()
+        public void Run()
         {
-            this.PrintWelcomeSign();
-            while (true)
+            this.StartNewGame();
+
+            while (!this.isGameOver)
             {
                 this.ReadAction();
             }
         }
 
+        private void StartNewGame()
+        {
+            this.PrintWelcomeSign();
+
+            secretNumber = Generator.SecretNumber();
+            usedCheat = false;
+            isGameOver = false;
+            attemptsCount = 1;
+        }
+
         private void Help()
         {
             this.usedCheat = true;
+
             if (helpCharecters.Contains('X'))
             {
                 int i;
@@ -97,6 +135,7 @@ namespace BullsAndCows
                 newHelpCharecters[i] = secretNumber.ToString()[i];
                 helpCharecters = new string(newHelpCharecters);
             }
+
             Console.WriteLine("The number looks like {0}.", helpCharecters);
         }
 
@@ -113,13 +152,16 @@ namespace BullsAndCows
             if (this.usedCheat)
             {
                 Console.WriteLine("You used cheat in this game to this you will not be added to the scoreboard.");
+                Console.ReadLine();
+                this.StartNewGame();
+                return;
             }
 
             string nickname = Console.ReadLine();
             Player player = new Player(nickname, this.attemptsCount);
             scoreBoard.AddPlayer(player);
 
-            StartNewGame();
+            this.StartNewGame();
         }
 
         private void ProcessGuess(int guessValue)

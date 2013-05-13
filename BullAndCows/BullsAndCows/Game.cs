@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace BullsAndCows
 {
-    class Program
+    class Game
     {      
          static void Main(string[] args)
          {
              GameEngine game = new GameEngine();
-             game.StartNewGame();
+             game.Run();
          }
     }
     
