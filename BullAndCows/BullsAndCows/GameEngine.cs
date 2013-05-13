@@ -6,21 +6,19 @@ namespace BullsAndCows
 {
     public class GameEngine
     {
-        private readonly Random randomNumber;
         private int secretNumber;
-        private bool canUseHelp;
+        private bool usedCheat;
         private int attemptsCount;
         private string helpCharecters;
         private ScoreBoard scoreBoard;
 
         public GameEngine()
         {
-            randomNumber = new Random();
-            this.secretNumber = randomNumber.Next(1000, 10000);
-            this.canUseHelp = true;
-            this.attemptsCount = 1;
+            this.secretNumber = Generator.SecretNumber();
+            this.usedCheat = false;
+            this.attemptsCount = 0;
             this.helpCharecters = "XXXX";
-            scoreBoard = new ScoreBoard();
+            this.scoreBoard = new ScoreBoard();
         }
 
         private bool ReadAction()
@@ -77,18 +75,21 @@ namespace BullsAndCows
         public void StartNewGame()
         {
             this.PrintWelcomeSign();
-            while (this.ReadAction()) ;
+            while (true)
+            {
+                this.ReadAction();
+            }
         }
 
         private void Help()
         {
-            this.canUseHelp = false;
+            this.usedCheat = true;
             if (helpCharecters.Contains('X'))
             {
                 int i;
                 do
                 {
-                    i = this.randomNumber.Next(0, 4);
+                    i = Generator.CheatIndex();
                 }
                 while (helpCharecters[i] != 'X');
 
@@ -105,14 +106,18 @@ namespace BullsAndCows
             Console.WriteLine("Use 'top' to view the top scoreboard, 'restart' to start a new game and 'help' to cheat and 'exit' to quit the game.");
         }
 
-        private void ProcessWin()
+        private void FinishGame()
         {
-            Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts.", attemptsCount);
+            Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts.", attemptsCount);  
            
-            if (this.canUseHelp)
+            if (this.usedCheat)
             {
-                scoreBoard.AddPlayer(this.attemptsCount);
+                Console.WriteLine("You used cheat in this game to this you will not be added to the scoreboard.");
             }
+
+            string nickname = Console.ReadLine();
+            Player player = new Player(nickname, this.attemptsCount);
+            scoreBoard.AddPlayer(player);
 
             StartNewGame();
         }
@@ -121,7 +126,7 @@ namespace BullsAndCows
         {
             if (guessValue == secretNumber)
             {
-                ProcessWin();
+                FinishGame();
             }
             else
             {

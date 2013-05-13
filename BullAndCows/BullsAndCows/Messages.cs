@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BullsAndCows
 {
-    public static class UserController
+    public static class Messages
     {
-
+        //public const string = ""
     }
 }
