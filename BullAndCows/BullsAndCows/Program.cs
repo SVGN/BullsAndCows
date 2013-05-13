@@ -7,7 +7,7 @@ namespace BullsAndCows
     {      
          static void Main(string[] args)
          {
-             Game game = new Game();
+             GameEngine game = new GameEngine();
              game.StartNewGame();
          }
     }

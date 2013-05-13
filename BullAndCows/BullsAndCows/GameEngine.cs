@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace BullsAndCows
 {
-    public class Game
+    public class GameEngine
     {
         private readonly Random randomNumber;
         private int secretNumber;
@@ -13,7 +13,7 @@ namespace BullsAndCows
         private string helpCharecters;
         private ScoreBoard scoreBoard;
 
-        public Game()
+        public GameEngine()
         {
             randomNumber = new Random();
             this.secretNumber = randomNumber.Next(1000, 10000);
