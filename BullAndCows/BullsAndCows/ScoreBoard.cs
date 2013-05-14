@@ -1,7 +1,7 @@
 ﻿namespace BullsAndCows
 {
-    using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Text;
 
     /// <summary>
@@ -10,7 +10,21 @@
     public class ScoreBoard
     {
         private const int PlayersToShow = 5;
-        private readonly List<Player> ranking = new List<Player>();
+        private List<Player> ranking = new List<Player>();
+        private ReadOnlyCollection<Player> rankingsReadonly;
+
+        public ReadOnlyCollection<Player> Ranking
+        {
+            get
+            {
+                return this.rankingsReadonly;
+            }
+        }
+
+        public ScoreBoard()
+        {
+            this.rankingsReadonly = new ReadOnlyCollection<Player>(this.ranking);
+        }
 
         /// <summary>
         /// Adds a player to the Score board.
