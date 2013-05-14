@@ -48,7 +48,6 @@
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScoreBoard.cs" />
-    <Compile Include="UserController.cs" />
     <Compile Include="Generator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

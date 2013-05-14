@@ -4,20 +4,19 @@
 
     public static class Generator
     {
-        public static int SecretNumber()
+        public static string SecretNumber(int secretNumberCount)
         {
-            const int SecretNumberDigitsCount = 4;
             const int DigitsCount = 10;
             Random randomNumberGenerator = new Random();
             int secretNumber = 0;
 
-            for (int i = 0; i < SecretNumberDigitsCount; i++)
+            for (int i = 0; i < secretNumberCount; i++)
             {
                 int randomDigit = randomNumberGenerator.Next(0, DigitsCount);
                 secretNumber += (int)Math.Pow(DigitsCount, i) * randomDigit;
             }
 
-            return secretNumber;
+            return secretNumber.ToString();
         }
 
         public static int CheatIndex()

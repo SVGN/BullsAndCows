@@ -6,7 +6,8 @@ namespace BullsAndCows
 {
     public class GameEngine
     {
-        private int secretNumber;
+        private const int SecretNumberLength = 4;
+        private string secretNumber;
         private bool usedCheat;
         private bool isGameOver;
         private int attemptsCount;
@@ -16,7 +17,7 @@ namespace BullsAndCows
 
         public GameEngine()
         {
-            this.secretNumber = Generator.SecretNumber();
+            this.secretNumber = "7725";//Generator.SecretNumber(SecretNumberLength);
             this.usedCheat = false;
             this.isGameOver = false;
             this.attemptsCount = 1;
@@ -24,32 +25,25 @@ namespace BullsAndCows
             this.scoreBoard = new ScoreBoard();
         }
 
-        private bool IsGuess(string input)
+        public void Run()
         {
-            if (input == null || input.Length != 4)
-            {
-                return false;
-            }
+            this.StartNewGame();
 
-            Regex pattern = new Regex("[1-9][0-9][0-9][0-9]");
-            return pattern.IsMatch(input);
+            while (!this.isGameOver)
+            {
+                this.ReadAction();
+            }
         }
 
-        private bool IsCommand(string input)
+        private void StartNewGame()
         {
-            if (input == null || input.Length == 0)
-            {
-                return false;
-            }
+            this.PrintWelcomeSign();
 
-            string uppedFirstChar = string.Empty;
-            if (char.IsLower(input[0]))
-            {
-                uppedFirstChar = char.ToUpper(input[0]).ToString() + input.Substring(1);
-            }
-
-            bool isCommand = Enum.TryParse(uppedFirstChar, out currentCommand);
-            return isCommand;
+            this.secretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);
+            this.usedCheat = false;
+            this.isGameOver = false;
+            this.attemptsCount = 1;
+            this.helpCharecters = "XXXX";
         }
 
         private void ReadAction()
@@ -59,7 +53,7 @@ namespace BullsAndCows
 
             if (this.IsGuess(input))
             {
-                int guess = int.Parse(input);
+                string guess = input;
                 this.ProcessGuess(guess);
             }
             else if (this.IsCommand(input))
@@ -98,24 +92,32 @@ namespace BullsAndCows
             }
         }
 
-        public void Run()
+        private bool IsGuess(string input)
         {
-            this.StartNewGame();
-
-            while (!this.isGameOver)
+            if (input == null || input.Length != 4)
             {
-                this.ReadAction();
+                return false;
             }
+
+            Regex pattern = new Regex("[1-9][0-9][0-9][0-9]");
+            return pattern.IsMatch(input);
         }
 
-        private void StartNewGame()
+        private bool IsCommand(string input)
         {
-            this.PrintWelcomeSign();
+            if (input == null || input.Length == 0)
+            {
+                return false;
+            }
 
-            this.secretNumber = Generator.SecretNumber();
-            this.usedCheat = false;
-            this.isGameOver = false;
-            this.attemptsCount = 1;
+            string uppedFirstChar = string.Empty;
+            if (char.IsLower(input[0]))
+            {
+                uppedFirstChar = char.ToUpper(input[0]).ToString() + input.Substring(1);
+            }
+
+            bool isCommand = Enum.TryParse(uppedFirstChar, out currentCommand);
+            return isCommand;
         }
 
         private void Help()
@@ -139,16 +141,52 @@ namespace BullsAndCows
             Console.WriteLine("The number looks like {0}.", helpCharecters);
         }
 
-        private void PrintWelcomeSign()
+        private void ProcessGuess(string guessNumber)
         {
-            Console.WriteLine("Welcome to “Bulls and Cows” game. Please try to guess my secret 4-digit number.");
-            Console.WriteLine("Use 'top' to view the top scoreboard, 'restart' to start a new game and 'help' to cheat and 'exit' to quit the game.");
+            if (guessNumber == secretNumber)
+            {
+                FinishGame();
+            }
+            else
+            {
+                int bulls = 0;
+                int cows = 0;
+
+                // Bull counter
+                bool[] isBull = new bool[SecretNumberLength];
+                for (int i = 0; i < SecretNumberLength; i++)
+                {
+                    if (secretNumber[i] == guessNumber[i])
+                    {
+                        isBull[i] = true;
+                        bulls++;
+                    }
+                }
+
+                // Cow counter
+                bool[] isCow = new bool[SecretNumberLength];
+                for (int i = 0; i < SecretNumberLength; i++)
+                {
+                    for (int j = 0; j < SecretNumberLength; j++)
+                    {
+                        if (!isBull[j] && !isCow[j] && (guessNumber[i] == this.secretNumber[j]))
+                        {
+                            isCow[j] = true;
+                            cows++;         
+                            break;
+                        }
+                    }
+                }
+
+                Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}", bulls, cows);
+                this.attemptsCount++;
+            }
         }
 
         private void FinishGame()
         {
-            Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts.", attemptsCount);  
-           
+            Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts.", attemptsCount);
+
             if (this.usedCheat)
             {
                 Console.WriteLine("You used cheat in this game to this you will not be added to the scoreboard.");
@@ -157,67 +195,21 @@ namespace BullsAndCows
                 return;
             }
 
+            Console.WriteLine("Please, write your nickname, because you will be added to the scoreboard.");
             string nickname = Console.ReadLine();
+            
             Player player = new Player(nickname, this.attemptsCount);
             scoreBoard.AddPlayer(player);
+            scoreBoard.Show();
 
+            Console.ReadLine();
             this.StartNewGame();
         }
 
-        private void ProcessGuess(int guessValue)
+        private void PrintWelcomeSign()
         {
-            if (guessValue == secretNumber)
-            {
-                FinishGame();
-            }
-            else
-            {
-                string secretNumString = secretNumber.ToString();
-                int secretNumLength = secretNumString.Length;
-                string guessNumString = guessValue.ToString();
-                bool[] isBull = new bool[secretNumLength];
-                int bulls = 0;
-                int cows = 0;
-
-                for (int i = 0; i < secretNumLength; i++)
-                {
-                    if (isBull[i] = secretNumString[i] == guessNumString[i])
-                    {
-                        bulls++;
-                    }
-                }
-
-                int[] digits = new int[10];
-
-                for (int i = 0; i < 10; i++)
-                {
-                    digits[i] = 0;
-                }
-
-                for (int i = 0; i < secretNumLength; i++)
-                {
-                    if (!isBull[i])
-                    {
-                        digits[secretNumString[i] - '0']++;
-                    }
-                }
-
-                for (int i = 0; i < secretNumLength; i++)
-                {
-                    if (!isBull[i])
-                    {
-                        if (digits[guessNumString[i] - '0'] > 0)
-                        {
-                            cows++;
-                            digits[guessNumString[i] - '0']--;
-                        }
-                    }
-                }
-
-                Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}", bulls, cows);
-                attemptsCount++;
-            }
+            Console.WriteLine("Welcome to “Bulls and Cows” game. Please try to guess my secret 4-digit number.");
+            Console.WriteLine("Use 'top' to view the top scoreboard, 'restart' to start a new game and 'help' to cheat and 'exit' to quit the game.");
         }
-
     }
 }
