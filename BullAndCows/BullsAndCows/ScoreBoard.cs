@@ -9,11 +9,6 @@
         private const int PlayersToShow = 5;
         private readonly List<Player> ranking = new List<Player>();
 
-        public ScoreBoard()
-        {
-
-        }
-
         public void AddPlayer(Player player)
         {
             this.ranking.Add(player);
@@ -51,7 +46,7 @@
 
         private void SortRanking()
         {
-            this.ranking.Sort((x,y) => x.CompareTo(y));
+            this.ranking.Sort((x, y) => x.CompareTo(y));
         }
     }
 }

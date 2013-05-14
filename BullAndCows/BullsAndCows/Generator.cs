@@ -43,7 +43,7 @@
                 helpNumber[i] = secretNumber[i];
             }
 
-            return string.Join("", helpNumber);
+            return string.Join(string.Empty, helpNumber);
         }
     }
 }

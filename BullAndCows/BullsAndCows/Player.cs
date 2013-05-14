@@ -4,15 +4,15 @@
 
     public class Player : IComparable<Player>
     {
-        public string Name { get; private set; }
-
-        public int Attemps { get; private set; }
-
         public Player(string name, int attemps)
         {
             this.Name = name;
             this.Attemps = attemps;
         }
+
+        public string Name { get; private set; }
+
+        public int Attemps { get; private set; }
 
         public override string ToString()
         {

@@ -113,7 +113,7 @@
                 uppedFirstChar = char.ToUpper(input[0]).ToString() + input.Substring(1);
             }
 
-            bool isCommand = Enum.TryParse(uppedFirstChar, out currentCommand);
+            bool isCommand = Enum.TryParse(uppedFirstChar, out this.currentCommand);
             return isCommand;
         }
 
@@ -150,7 +150,7 @@
                 bool[] isBull = new bool[SecretNumberLength];
                 for (int i = 0; i < SecretNumberLength; i++)
                 {
-                    if (secretNumber[i] == guessNumber[i])
+                    if (this.secretNumber[i] == guessNumber[i])
                     {
                         isBull[i] = true;
                         bulls++;
@@ -193,7 +193,7 @@
             string nickname = Console.ReadLine();
             
             Player player = new Player(nickname, this.attemptsCount);
-            scoreBoard.AddPlayer(player);
+            this.scoreBoard.AddPlayer(player);
             this.consolePrinter.PrintScoreBoard(this.scoreBoard);
             Console.ReadLine();
 
