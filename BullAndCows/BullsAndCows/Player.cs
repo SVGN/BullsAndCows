@@ -15,7 +15,7 @@
         public Player(string name, int attemps)
         {
             this.Name = name;
-            this.Attemps = attemps;
+            this.Attempts = attemps;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@
         /// <summary>
         /// Gets the player's guess attempts.
         /// </summary>
-        public int Attemps { get; private set; }
+        public int Attempts { get; private set; }
 
         /// <summary>
         /// String representation of the player.
@@ -34,7 +34,7 @@
         /// <returns>String representation.</returns>
         public override string ToString()
         {
-            string output = string.Format("{0} --> {1} guesses", this.Name, this.Attemps);
+            string output = string.Format("{0} --> {1} guesses", this.Name, this.Attempts);
             return output;
         }
 
@@ -45,7 +45,7 @@
         /// <returns>Compare in attemts, then in name and then in hashcode.</returns>
         public int CompareTo(Player other)
         {
-            int compareInAttempts = this.Attemps.CompareTo(other.Attemps);
+            int compareInAttempts = this.Attempts.CompareTo(other.Attempts);
             int compareInName = this.Name.CompareTo(other.Name);
             if (compareInAttempts == 0)
             {
