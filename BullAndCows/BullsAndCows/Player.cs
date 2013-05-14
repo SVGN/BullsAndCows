@@ -42,11 +42,17 @@
         /// Compares this player to an other one.
         /// </summary>
         /// <param name="other">Other player.</param>
-        /// <returns>Returns -1, 0 or 1 respectively whether this player has better, 
-        /// same or worse result than the other player.</returns>
+        /// <returns>Compare in attemts, then in name and then in hashcode.</returns>
         public int CompareTo(Player other)
         {
-            return this.Attemps.CompareTo(other.Attemps);
+            int compareInAttempts = this.Attemps.CompareTo(other.Attemps);
+            int compareInName = this.Name.CompareTo(other.Name);
+            if (compareInAttempts == 0)
+            {
+                return compareInName;
+            }
+
+            return compareInAttempts;
         }
     }
 }
