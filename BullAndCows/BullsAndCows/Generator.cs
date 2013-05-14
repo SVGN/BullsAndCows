@@ -7,6 +7,8 @@
     /// </summary>
     public static class Generator
     {
+        private static Random randomNumberGenerator = new Random();
+
         /// <summary>
         /// Generates a random number with a specific length.
         /// </summary>
@@ -15,7 +17,6 @@
         public static string SecretNumber(int secretNumberLength)
         {
             const int DigitsCount = 10;
-            Random randomNumberGenerator = new Random();
             int secretNumber = 0;
 
             for (int i = 0; i < secretNumberLength; i++)
@@ -34,7 +35,6 @@
         public static int HelpIndex()
         {
             const int DigitsCount = 4;
-            Random randomNumberGenerator = new Random();
             int cheatIndex = randomNumberGenerator.Next(0, DigitsCount);
             return cheatIndex;
         }
