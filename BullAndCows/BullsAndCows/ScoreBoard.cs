@@ -4,17 +4,28 @@
     using System.Collections.Generic;
     using System.Text;
 
+    /// <summary>
+    /// The class represents a ScoreBoard's info.
+    /// </summary>
     public class ScoreBoard
     {
         private const int PlayersToShow = 5;
         private readonly List<Player> ranking = new List<Player>();
 
+        /// <summary>
+        /// Adds a player to the Score board.
+        /// </summary>
+        /// <param name="player">Player object.</param>
         public void AddPlayer(Player player)
         {
             this.ranking.Add(player);
             this.SortRanking();
         }
 
+        /// <summary>
+        /// Gets the string representation of the Score board.
+        /// </summary>
+        /// <returns>String representation.</returns>
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();

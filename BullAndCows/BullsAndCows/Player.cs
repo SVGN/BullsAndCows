@@ -2,24 +2,48 @@
 {
     using System;
 
+    /// <summary>
+    /// The class represents a player's info.
+    /// </summary>
     public class Player : IComparable<Player>
     {
+        /// <summary>
+        /// Constructs a "Bulls and Cows" Player.
+        /// </summary>
+        /// <param name="name">Player's name.</param>
+        /// <param name="attemps">Player's attempts to guess the secret number.</param>
         public Player(string name, int attemps)
         {
             this.Name = name;
             this.Attemps = attemps;
         }
 
+        /// <summary>
+        /// Gets the player's name.
+        /// </summary>
         public string Name { get; private set; }
 
+        /// <summary>
+        /// Gets the player's guess attempts.
+        /// </summary>
         public int Attemps { get; private set; }
 
+        /// <summary>
+        /// String representation of the player.
+        /// </summary>
+        /// <returns>String representation.</returns>
         public override string ToString()
         {
             string output = string.Format("{0} --> {1} guesses", this.Name, this.Attemps);
             return output;
         }
 
+        /// <summary>
+        /// Compares this player to an other one.
+        /// </summary>
+        /// <param name="other">Other player.</param>
+        /// <returns>Returns -1, 0 or 1 respectively whether this player has better, 
+        /// same or worse result than the other player.</returns>
         public int CompareTo(Player other)
         {
             return this.Attemps.CompareTo(other.Attemps);

@@ -3,6 +3,9 @@
     using System;
     using System.Text.RegularExpressions;
 
+    /// <summary>
+    /// The class is used to simulate the game.
+    /// </summary>
     public class GameEngine
     {
         private const int MaxHelpsCount = 5;
@@ -17,6 +20,9 @@
         private int helpsCount;
         private bool exitFromGame;
         
+        /// <summary>
+        /// Initializes a new instance of GameEngine class.
+        /// </summary>
         public GameEngine()
         {
             this.scoreBoard = new ScoreBoard();
@@ -24,6 +30,9 @@
             this.exitFromGame = false;
         }
 
+        /// <summary>
+        /// Runs the game.
+        /// </summary>
         public void Run()
         {
             this.StartNewGame();

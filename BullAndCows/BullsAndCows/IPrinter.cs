@@ -1,5 +1,8 @@
 ﻿namespace BullsAndCows
 {
+    /// <summary>
+    /// The interface includes messages which will be used ingame.
+    /// </summary>
     public interface IPrinter
     {
         void PrintWelcomeMessage();

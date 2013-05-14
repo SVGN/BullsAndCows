@@ -2,8 +2,16 @@
 {
     using System;
 
+    /// <summary>
+    /// The class is used to generate values for fields of the game which require a random value.
+    /// </summary>
     public static class Generator
     {
+        /// <summary>
+        /// Generates a random number with a specific length.
+        /// </summary>
+        /// <param name="secretNumberCount">Length of the number.</param>
+        /// <returns>Generated number.</returns>
         public static string SecretNumber(int secretNumberCount)
         {
             const int DigitsCount = 10;
@@ -19,6 +27,10 @@
             return secretNumber.ToString();
         }
 
+        /// <summary>
+        /// Generates a random index, which's value will be returned later.
+        /// </summary>
+        /// <returns>Generated index.</returns>
         public static int HelpIndex()
         {
             const int DigitsCount = 4;
@@ -27,6 +39,12 @@
             return cheatIndex;
         }
 
+        /// <summary>
+        /// Gets the secret number's digit at a specified position.
+        /// </summary>
+        /// <param name="secretNumber">Secret number string value.</param>
+        /// <param name="helpIndex">Position of the digit to show.</param>
+        /// <returns>The digit's value at the specified position</returns>
         public static string HelpNumber(string secretNumber, int helpIndex)
         {
             const char HiddenDigits = 'X';
