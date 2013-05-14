@@ -27,5 +27,39 @@ namespace BullsAndCows.Test
             if (!hasDifferentNumbers)
                 Assert.Fail("The generated numbers are not random.");                
         }
+
+        [TestMethod]
+        public void HelpIndexTest()
+        {
+            int[] indexes = new int[10];
+
+            for (int i = 0; i < indexes.Length; i++)
+            {
+                indexes[i] = Generator.HelpIndex();
+            }
+
+            //We will check whether we have at least 2 different indexes in the array.
+            bool hasDifferentIndexes = false;
+            for (int i = 1; i < indexes.Length; i++)
+            {
+                if (indexes[0] != indexes[i])
+                    hasDifferentIndexes = true;
+            }
+
+            if (!hasDifferentIndexes)
+                Assert.Fail("The generated indexes are not random.");
+        }
+
+        [TestMethod]
+        public void HelpNumberTest()
+        {
+            string secretNumber = "1234";
+            int helpIndex = 2;
+            string result = Generator.HelpNumber(secretNumber, helpIndex);
+
+            Assert.AreEqual(result[helpIndex], '3');
+            Assert.AreNotEqual(result[helpIndex], 'X');
+            Assert.AreEqual(result, "XX3X");
+        }
     }
 }
