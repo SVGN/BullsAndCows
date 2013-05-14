@@ -10,15 +10,15 @@
         /// <summary>
         /// Generates a random number with a specific length.
         /// </summary>
-        /// <param name="secretNumberCount">Length of the number.</param>
+        /// <param name="secretNumberLength">Length of the number.</param>
         /// <returns>Generated number.</returns>
-        public static string SecretNumber(int secretNumberCount)
+        public static string SecretNumber(int secretNumberLength)
         {
             const int DigitsCount = 10;
             Random randomNumberGenerator = new Random();
             int secretNumber = 0;
 
-            for (int i = 0; i < secretNumberCount; i++)
+            for (int i = 0; i < secretNumberLength; i++)
             {
                 int randomDigit = randomNumberGenerator.Next(0, DigitsCount);
                 secretNumber += (int)Math.Pow(DigitsCount, i) * randomDigit;

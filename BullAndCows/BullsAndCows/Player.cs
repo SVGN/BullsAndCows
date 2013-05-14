@@ -8,7 +8,7 @@
     public class Player : IComparable<Player>
     {
         /// <summary>
-        /// Constructs a "Bulls and Cows" Player.
+        /// Initializes a new instance of Player class.
         /// </summary>
         /// <param name="name">Player's name.</param>
         /// <param name="attemps">Player's attempts to guess the secret number.</param>
