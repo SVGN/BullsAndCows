@@ -42,8 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command.cs" />
+    <Compile Include="ConsolePrinter.cs" />
     <Compile Include="GameEngine.cs" />
-    <Compile Include="Messages.cs" />
+    <Compile Include="IPrinter.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

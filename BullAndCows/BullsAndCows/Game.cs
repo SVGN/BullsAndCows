@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
-
-namespace BullsAndCows
+﻿namespace BullsAndCows
 {
-    class Game
+    public class Game
     {      
-         static void Main(string[] args)
+         public static void Main()
          {
              GameEngine game = new GameEngine();
              game.Run();
