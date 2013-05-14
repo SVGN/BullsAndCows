@@ -39,10 +39,17 @@ namespace BullsAndCows.Test
             Assert.AreEqual(player1.CompareTo(player2), 0);
         }
         [TestMethod]
-        public void PlayerCompareNotEqualTest()
+        public void PlayerCompareNamesNotEqualTest()
         {
             Player player1 = new Player("Ivan", 3);
-            Player player2 = new Player("Dragan", 4);
+            Player player2 = new Player("Dragan", 3);
+            Assert.AreNotEqual(player1.CompareTo(player2), 0);
+        }
+        [TestMethod]
+        public void PlayerCompareAttemptsNotEqualTest()
+        {
+            Player player1 = new Player("Ivan", 3);
+            Player player2 = new Player("Ivan", 4);
             Assert.AreNotEqual(player1.CompareTo(player2), 0);
         }
     }
