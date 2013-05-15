@@ -28,6 +28,20 @@ namespace BullsAndCows.Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void PlayerZeroAttemptsTest()
+        {
+            Player player = new Player("Petar Ivanov", 0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void PlayerNegativeAttemptsTest()
+        {
+            Player player = new Player("Petar Ivanov", -5);
+        }
+
+        [TestMethod]
         public void PlayerConstructorTestName()
         {
             string name = "Petar Ivanov";
