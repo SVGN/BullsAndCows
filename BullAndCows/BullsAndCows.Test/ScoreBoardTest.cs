@@ -81,7 +81,24 @@ namespace BullsAndCows.Test
             }
 
             StringBuilder output = new StringBuilder();
+            SetOutput(scoreBoard, output);
 
+            Assert.IsTrue(scoreBoard.ToString() == output.ToString());
+        }
+
+        [TestMethod]
+        public void ScoreBoardEmptyToStringTest()
+        {
+            ScoreBoard scoreBoard = new ScoreBoard();
+
+            StringBuilder output = new StringBuilder();
+            SetOutput(scoreBoard, output);
+
+            Assert.IsTrue(scoreBoard.ToString() == output.ToString());
+        }
+
+        private static void SetOutput(ScoreBoard scoreBoard, StringBuilder output)
+        {
             if (scoreBoard.Ranking.Count > 0)
             {
                 output.AppendLine("Scoreboard:");
@@ -95,8 +112,6 @@ namespace BullsAndCows.Test
             {
                 output.AppendFormat("{0}. {1}\n", i + 1, scoreBoard.Ranking[i]);
             }
-
-            Assert.IsTrue(scoreBoard.ToString() == output.ToString());
         }
     }
 }
