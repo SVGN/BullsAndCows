@@ -10,9 +10,9 @@
     /// </summary>
     public class ScoreBoard
     {
-        private const int PlayersToShow = 5;
         private List<Player> ranking = new List<Player>();
         private ReadOnlyCollection<Player> rankingsReadonly;
+        public const int PlayersToShow = 5;
 
         public ReadOnlyCollection<Player> Ranking
         {

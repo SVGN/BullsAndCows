@@ -85,7 +85,7 @@
         {
             // Ascending order
             int compareInAttempts = -this.Attempts.CompareTo(other.Attempts);
-            int compareInName = -this.Name.CompareTo(other.Name);
+            int compareInName = this.Name.CompareTo(other.Name);
             if (compareInAttempts == 0)
             {
                 return compareInName;
