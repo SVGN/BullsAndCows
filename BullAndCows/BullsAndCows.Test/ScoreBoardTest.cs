@@ -59,13 +59,7 @@ namespace BullsAndCows.Test
             bool areSorted = true;
             for (int i = 0; i < scoreBoard.Ranking.Count - 1; i++)
             {
-                if (scoreBoard.Ranking[i].Attempts > scoreBoard.Ranking[i + 1].Attempts)
-                {
-                    areSorted = false;
-                }
-
-                if (scoreBoard.Ranking[i].Attempts == scoreBoard.Ranking[i + 1].Attempts &&
-                    scoreBoard.Ranking[i].Name.CompareTo(scoreBoard.Ranking[i + 1].Name) > 0)
+                if (scoreBoard.Ranking[i].CompareTo(scoreBoard.Ranking[i + 1]) > 0)
                 {
                     areSorted = false;
                 }
