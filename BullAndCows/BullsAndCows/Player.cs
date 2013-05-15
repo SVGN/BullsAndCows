@@ -3,11 +3,10 @@
     using System;
 
     /// <summary>
-    /// The class represents a player's info.
+    /// The class represents a player's info. Implements IComparable.
     /// </summary>
     public class Player : IComparable<Player>
     {
-        // TODO: Check documentation
         private string name;
         private int attempts;
 
@@ -22,7 +21,6 @@
             this.Attempts = attemps;
         }
 
-        // TODO: Check documentation
         /// <summary>
         /// Gets the player's name.
         /// </summary>
@@ -44,7 +42,6 @@
             }
         }
 
-        // TODO: Check documentation
         /// <summary>
         /// Gets the player's guess attempts.
         /// </summary>
@@ -77,13 +74,12 @@
         }
 
         /// <summary>
-        /// Compares this player to an other one.
+        /// Compares this player to another one in ascending order.
         /// </summary>
         /// <param name="other">Other player.</param>
-        /// <returns>Compare in attemts and then in name.</returns>
+        /// <returns>Compare in attemts and then in name (Ascending order).</returns>
         public int CompareTo(Player other)
         {
-            // Ascending order
             int compareInAttempts = -this.Attempts.CompareTo(other.Attempts);
             int compareInName = this.Name.CompareTo(other.Name);
             if (compareInAttempts == 0)
