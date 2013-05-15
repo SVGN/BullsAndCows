@@ -7,6 +7,7 @@
     /// </summary>
     public class Player : IComparable<Player>
     {
+        // TODO: Check documentation
         private string name;
         private int attempts;
 
@@ -21,6 +22,7 @@
             this.Attempts = attemps;
         }
 
+        // TODO: Check documentation
         /// <summary>
         /// Gets the player's name.
         /// </summary>
@@ -42,6 +44,7 @@
             }
         }
 
+        // TODO: Check documentation
         /// <summary>
         /// Gets the player's guess attempts.
         /// </summary>
@@ -80,8 +83,9 @@
         /// <returns>Compare in attemts, then in name and then in hashcode.</returns>
         public int CompareTo(Player other)
         {
-            int compareInAttempts = this.Attempts.CompareTo(other.Attempts);
-            int compareInName = this.Name.CompareTo(other.Name);
+            // Ascending order
+            int compareInAttempts = -this.Attempts.CompareTo(other.Attempts);
+            int compareInName = -this.Name.CompareTo(other.Name);
             if (compareInAttempts == 0)
             {
                 return compareInName;

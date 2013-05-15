@@ -7,12 +7,35 @@ namespace BullsAndCows.Test
     public class PlayerTests
     {
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PlayerNullNameTest()
+        {
+            Player player = new Player(null, 5);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PlayerEmptyNameTest()
+        {
+            Player player = new Player(string.Empty, 5);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void PlayerWhitespaceNameTest()
+        {
+            Player player = new Player("    ", 5);
+        }
+
+        [TestMethod]
         public void PlayerConstructorTestName()
         {
             string name = "Petar Ivanov";
             int attempts = 6;
             Player player = new Player(name, attempts);
-            Assert.AreEqual(player.Name, "Petar Ivanov");
+            string actual = player.Name;
+            string expected = name;
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -21,7 +44,9 @@ namespace BullsAndCows.Test
             string name = "Petar Ivanov";
             int attempts = 6;
             Player player = new Player(name, attempts);
-            Assert.AreEqual(player.Attempts, 6);
+            int actual = player.Attempts;
+            int expected = attempts;
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -30,8 +55,9 @@ namespace BullsAndCows.Test
             string name = "Petar Ivanov";
             int attempts = 6;
             Player player = new Player(name, attempts);
-            string result = player.ToString();
-            Assert.AreEqual(result, string.Format("{0} --> {1} guesses", name, attempts));
+            string actual = player.ToString();
+            string expected = string.Format("{0} --> {1} guesses", name, attempts);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -39,7 +65,7 @@ namespace BullsAndCows.Test
         {
             Player player1 = new Player("Ivan", 3);
             Player player2 = new Player("Ivan", 3);
-            Assert.AreEqual(player1.CompareTo(player2), 0);
+            Assert.AreEqual(0, player1.CompareTo(player2));
         }
 
         [TestMethod]
@@ -47,7 +73,7 @@ namespace BullsAndCows.Test
         {
             Player player1 = new Player("Ivan", 3);
             Player player2 = new Player("Dragan", 3);
-            Assert.AreNotEqual(player1.CompareTo(player2), 0);
+            Assert.AreNotEqual(0, player1.CompareTo(player2));
         }
 
         [TestMethod]
@@ -55,7 +81,23 @@ namespace BullsAndCows.Test
         {
             Player player1 = new Player("Ivan", 3);
             Player player2 = new Player("Ivan", 4);
-            Assert.AreNotEqual(player1.CompareTo(player2), 0);
+            Assert.AreNotEqual(0, player1.CompareTo(player2));
+        }
+
+        [TestMethod]
+        public void PlayerCompareFirstPlayerIsWithHighScore()
+        {
+            Player player1 = new Player("Ivan", 2);
+            Player player2 = new Player("Dragan", 3);
+            Assert.IsTrue(player1.CompareTo(player2) > 0);
+        }
+
+        [TestMethod]
+        public void PlayerCompareSecondPlayerIsWithHighScore()
+        {
+            Player player1 = new Player("Ivan", 6);
+            Player player2 = new Player("Dragan", 3);
+            Assert.IsTrue(player1.CompareTo(player2) < 0);
         }
     }
 }
