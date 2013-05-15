@@ -7,6 +7,9 @@
     /// </summary>
     public class Player : IComparable<Player>
     {
+        private string name;
+        private int attempts;
+
         /// <summary>
         /// Initializes a new instance of Player class.
         /// </summary>
@@ -21,12 +24,44 @@
         /// <summary>
         /// Gets the player's name.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Player name cannot be null or empty!", "name");
+                }
+
+                this.name = value;
+            }
+        }
 
         /// <summary>
         /// Gets the player's guess attempts.
         /// </summary>
-        public int Attempts { get; private set; }
+        public int Attempts
+        {
+            get
+            {
+                return this.attempts;
+            }
+
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentOutOfRangeException("attempts", "Player attempts cannot be less than 1!");
+                }
+
+                this.attempts = value;
+            }
+        }
 
         /// <summary>
         /// String representation of the player.

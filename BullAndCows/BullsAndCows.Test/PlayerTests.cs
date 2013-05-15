@@ -14,6 +14,7 @@ namespace BullsAndCows.Test
             Player player = new Player(name, attempts);
             Assert.AreEqual(player.Name, "Petar Ivanov");
         }
+
         [TestMethod]
         public void PlayerConstructorTestAttempts()
         {
@@ -22,6 +23,7 @@ namespace BullsAndCows.Test
             Player player = new Player(name, attempts);
             Assert.AreEqual(player.Attempts, 6);
         }
+
         [TestMethod]
         public void PlayerToStringTest()
         {
@@ -31,6 +33,7 @@ namespace BullsAndCows.Test
             string result = player.ToString();
             Assert.AreEqual(result, string.Format("{0} --> {1} guesses", name, attempts));
         }
+
         [TestMethod]
         public void PlayerCompareEqualTest()
         {
@@ -38,6 +41,7 @@ namespace BullsAndCows.Test
             Player player2 = new Player("Ivan", 3);
             Assert.AreEqual(player1.CompareTo(player2), 0);
         }
+
         [TestMethod]
         public void PlayerCompareNamesNotEqualTest()
         {
@@ -45,6 +49,7 @@ namespace BullsAndCows.Test
             Player player2 = new Player("Dragan", 3);
             Assert.AreNotEqual(player1.CompareTo(player2), 0);
         }
+
         [TestMethod]
         public void PlayerCompareAttemptsNotEqualTest()
         {
