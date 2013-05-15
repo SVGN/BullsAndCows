@@ -1,5 +1,6 @@
 ﻿namespace BullsAndCows
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Text;
@@ -32,6 +33,11 @@
         /// <param name="player">Player object.</param>
         public void AddPlayer(Player player)
         {
+            if (player == null)
+            {
+                throw new ArgumentNullException("player", "Player cannot be null.");
+            }
+
             this.ranking.Add(player);
             this.SortRanking();
         }
