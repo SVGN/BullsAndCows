@@ -80,7 +80,7 @@
         /// Compares this player to an other one.
         /// </summary>
         /// <param name="other">Other player.</param>
-        /// <returns>Compare in attemts, then in name and then in hashcode.</returns>
+        /// <returns>Compare in attemts and then in name.</returns>
         public int CompareTo(Player other)
         {
             // Ascending order
