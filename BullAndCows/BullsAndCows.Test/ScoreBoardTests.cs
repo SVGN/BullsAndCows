@@ -5,7 +5,7 @@ using System.Text;
 namespace BullsAndCows.Test
 {
     [TestClass]
-    public class ScoreBoardTest
+    public class ScoreBoardTests
     {
         [TestMethod]
         public void ScoreBoardConstructorTest()

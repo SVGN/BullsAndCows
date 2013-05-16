@@ -1,6 +1,6 @@
 ﻿namespace BullsAndCows
 {
-    public class Game
+    public class BullsAndCows
     {      
          public static void Main()
          {

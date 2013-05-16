@@ -64,6 +64,16 @@ namespace BullsAndCows.Test
         }
 
         [TestMethod]
+        public void PlayerNameSetterTest()
+        {
+            Player player = new Player("Ivan", 19);
+            typeof(Player).GetProperty("Name").SetValue(player, "Gosho");
+            string actual = player.Name;
+            string expected = "Gosho";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void PlayerToStringTest()
         {
             string name = "Petar Ivanov";
