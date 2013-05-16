@@ -105,6 +105,9 @@
             Console.WriteLine(scoreBoard);
         }
 
+        /// <summary>
+        /// Clears console.
+        /// </summary>
         public void Clear()
         {
             Console.Clear();
