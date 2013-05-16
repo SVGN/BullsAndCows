@@ -30,6 +30,46 @@ namespace BullsAndCows.Test
             }
         }
 
+        [TestMethod]
+        public void ExitCommandTest()
+        {
+            GameEngine gameEngine = new GameEngine();
+            gameEngine.ReadAction("exit");
+            Command actual = gameEngine.CurrentCommand;
+            Command expected = Command.Exit;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RestartCommandTest()
+        {
+            GameEngine gameEngine = new GameEngine();
+            gameEngine.ReadAction("restart");
+            Command actual = gameEngine.CurrentCommand;
+            Command expected = Command.Restart;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void TopCommandTest()
+        {
+            GameEngine gameEngine = new GameEngine();
+            gameEngine.ReadAction("top");
+            Command actual = gameEngine.CurrentCommand;
+            Command expected = Command.Top;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void HelpCommandTest()
+        {
+            GameEngine gameEngine = new GameEngine();
+            gameEngine.ReadAction("help");
+            Command actual = gameEngine.CurrentCommand;
+            Command expected = Command.Help;
+            Assert.AreEqual(expected, actual);
+        }
+
         //[TestMethod]
         //public void GameEngineRestartCommandTest()
         //{
