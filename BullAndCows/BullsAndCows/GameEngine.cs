@@ -42,15 +42,14 @@
 
             while (!this.ExitFromGame)
             {
-                this.ReadAction();
+                this.ConsolePrinter.PrintGuessOrCommandAskingMessage();
+                string input = Console.ReadLine().Trim();
+                this.ReadAction(input);
             }
         }
 
-        public void ReadAction()
+        public void ReadAction(string input)
         {
-            this.ConsolePrinter.PrintGuessOrCommandAskingMessage();
-            string input = Console.ReadLine().Trim();
-
             if (this.IsGuess(input))
             {
                 string guess = input;
