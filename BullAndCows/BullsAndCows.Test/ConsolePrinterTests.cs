@@ -194,7 +194,7 @@ namespace BullsAndCows.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(IOException))]
+        //[ExpectedException(typeof(IOException))]
         public void ConsolePrinterClearTest()
         {
             using (StringWriter sw = new StringWriter())

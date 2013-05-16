@@ -8,26 +8,29 @@
     /// </summary>
     public class GameEngine
     {
-        private const int MaxHelpsCount = 5;
-        private const int SecretNumberLength = 4;
+        public const int MaxHelpsCount = 5;
+        public const int SecretNumberLength = 4;
 
-        private readonly ScoreBoard scoreBoard;
-        private readonly IPrinter consolePrinter;
+        public readonly ScoreBoard ScoreBoard;
+        public readonly IPrinter ConsolePrinter;
 
-        private Command currentCommand;
-        private string secretNumber;
-        private int attemptsCount;
-        private int helpsCount;
-        private bool exitFromGame;
+        public Command CurrentCommand { get; private set; }
+        public string SecretNumber { get; private set; }
+        public int AttemptsCount { get; private set; }
+        public int HelpsCount { get; private set; }
+        public bool ExitFromGame { get; private set; }
         
         /// <summary>
         /// Initializes a new instance of GameEngine class.
         /// </summary>
         public GameEngine()
         {
-            this.scoreBoard = new ScoreBoard();
-            this.consolePrinter = new ConsolePrinter();
-            this.exitFromGame = false;
+            this.ScoreBoard = new ScoreBoard();
+            this.ConsolePrinter = new ConsolePrinter();
+            this.SecretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
+            this.AttemptsCount = 0;
+            this.HelpsCount = 0;
+            this.ExitFromGame = false;
         }
 
         /// <summary>
@@ -35,27 +38,17 @@
         /// </summary>
         public void Run()
         {
-            this.StartNewGame();
+            this.ConsolePrinter.PrintWelcomeMessage();
 
-            while (!this.exitFromGame)
+            while (!this.ExitFromGame)
             {
                 this.ReadAction();
             }
         }
 
-        private void StartNewGame()
+        public void ReadAction()
         {
-            this.consolePrinter.Clear();
-            this.consolePrinter.PrintWelcomeMessage();
-
-            this.secretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
-            this.attemptsCount = 0;
-            this.helpsCount = 0;
-        }
-
-        private void ReadAction()
-        {
-            this.consolePrinter.PrintGuessOrCommandAskingMessage();
+            this.ConsolePrinter.PrintGuessOrCommandAskingMessage();
             string input = Console.ReadLine().Trim();
 
             if (this.IsGuess(input))
@@ -65,11 +58,11 @@
             }
             else if (this.IsCommand(input))
             {
-                switch (this.currentCommand)
+                switch (this.CurrentCommand)
                 {
                     case Command.Top:
                         {
-                            this.consolePrinter.PrintScoreBoard(this.scoreBoard);
+                            this.ConsolePrinter.PrintScoreBoard(this.ScoreBoard);
                             break;
                         }
 
@@ -87,16 +80,26 @@
 
                     case Command.Exit:
                         {
-                            this.exitFromGame = true;
+                            this.ExitFromGame = true;
                             break;
                         }
                 }
             }
             else
             {
-                this.consolePrinter.PrintWrongGuessOrCommandMessage();
+                this.ConsolePrinter.PrintWrongGuessOrCommandMessage();
             }
         }
+
+        private void StartNewGame()
+        {
+            this.ConsolePrinter.Clear();
+            this.ConsolePrinter.PrintWelcomeMessage();
+
+            this.SecretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
+            this.AttemptsCount = 0;
+            this.HelpsCount = 0;
+        } 
 
         private bool IsGuess(string input)
         {
@@ -122,31 +125,38 @@
                 uppedFirstChar = char.ToUpper(input[0]).ToString() + input.Substring(1);
             }
 
-            bool isCommand = Enum.TryParse(uppedFirstChar, out this.currentCommand);
+            Command newCommand;
+            bool isCommand = Enum.TryParse(uppedFirstChar, out newCommand);
+
+            if (isCommand)
+            {
+                this.CurrentCommand = newCommand;
+            }
+
             return isCommand;
         }
 
         private void Help()
         {
-            if (this.helpsCount >= MaxHelpsCount)
+            if (this.HelpsCount >= MaxHelpsCount)
             {
-                this.consolePrinter.PrintForbiddenHelpMessage();
+                this.ConsolePrinter.PrintForbiddenHelpMessage();
                 return;
             }
 
-            this.helpsCount++;
+            this.HelpsCount++;
 
             int helpIndex = Generator.HelpIndex();
-            string helpNumber = Generator.HelpNumber(this.secretNumber, helpIndex);
-            this.consolePrinter.PrintHelpNumberMessage(helpNumber);
-            this.consolePrinter.PrintRemainingHelpsMessage(MaxHelpsCount, this.helpsCount);
+            string helpNumber = Generator.HelpNumber(this.SecretNumber, helpIndex);
+            this.ConsolePrinter.PrintHelpNumberMessage(helpNumber);
+            this.ConsolePrinter.PrintRemainingHelpsMessage(MaxHelpsCount, this.HelpsCount);
         }
 
         private void ProcessGuess(string guessNumber)
         {
-            this.attemptsCount++;
+            this.AttemptsCount++;
 
-            if (guessNumber == this.secretNumber)
+            if (guessNumber == this.SecretNumber)
             {
                 this.AddResultToScoreBoard();
             }
@@ -159,7 +169,7 @@
                 bool[] isBull = new bool[SecretNumberLength];
                 for (int i = 0; i < SecretNumberLength; i++)
                 {
-                    if (this.secretNumber[i] == guessNumber[i])
+                    if (this.SecretNumber[i] == guessNumber[i])
                     {
                         isBull[i] = true;
                         bulls++;
@@ -172,7 +182,7 @@
                 {
                     for (int j = 0; j < SecretNumberLength; j++)
                     {
-                        if (!isBull[j] && !isCow[j] && (guessNumber[i] == this.secretNumber[j]))
+                        if (!isBull[j] && !isCow[j] && (guessNumber[i] == this.SecretNumber[j]))
                         {
                             isCow[j] = true;
                             cows++;         
@@ -181,29 +191,29 @@
                     }
                 }
 
-                this.consolePrinter.PrintFailedGuessMessage(bulls, cows);
+                this.ConsolePrinter.PrintFailedGuessMessage(bulls, cows);
             }
         }
 
         private void AddResultToScoreBoard()
         {
-            this.consolePrinter.PrintResultMessage(this.attemptsCount);
+            this.ConsolePrinter.PrintResultMessage(this.AttemptsCount);
 
-            if (this.helpsCount > 0)
+            if (this.HelpsCount > 0)
             {
-                this.consolePrinter.PrintUnsavedResultMessage();
+                this.ConsolePrinter.PrintUnsavedResultMessage();
                 Console.ReadLine();
 
                 this.StartNewGame();
                 return;
             }
 
-            this.consolePrinter.PrintNicknameMessage();
+            this.ConsolePrinter.PrintNicknameMessage();
             string nickname = Console.ReadLine();
             
-            Player player = new Player(nickname, this.attemptsCount);
-            this.scoreBoard.AddPlayer(player);
-            this.consolePrinter.PrintScoreBoard(this.scoreBoard);
+            Player player = new Player(nickname, this.AttemptsCount);
+            this.ScoreBoard.AddPlayer(player);
+            this.ConsolePrinter.PrintScoreBoard(this.ScoreBoard);
             Console.ReadLine();
 
             this.StartNewGame();

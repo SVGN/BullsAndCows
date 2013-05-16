@@ -42,7 +42,7 @@
         /// <summary>
         /// Gets the secret number's digit at a specified position.
         /// </summary>
-        /// <param name="secretNumber">Secret number string value.</param>
+        /// <param name="SecretNumber">Secret number string value.</param>
         /// <param name="helpIndex">Position of the digit to show.</param>
         /// <returns>The digit's value at the specified position</returns>
         public static string HelpNumber(string secretNumber, int helpIndex)

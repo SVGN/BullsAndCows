@@ -99,7 +99,7 @@
         /// <summary>
         /// Prints the Score board to the console.
         /// </summary>
-        /// <param name="scoreBoard"></param>
+        /// <param name="ScoreBoard"></param>
         public void PrintScoreBoard(ScoreBoard scoreBoard)
         {
             Console.WriteLine(scoreBoard);
