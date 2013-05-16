@@ -13,9 +13,10 @@
         public void PrintWelcomeMessage()
         {
             Console.WriteLine("Welcome to “Bulls and Cows” game. Please try to guess my secret 4-digit number.");
-            Console.WriteLine("Use 'top' to view the top scoreboard, 'restart' to start a new game and 'help' to cheat and 'exit' to quit the game.");
+            Console.WriteLine("Use 'top' to view the top scoreboard, 'restart' to start a new game and 'help' to cheat and 'exit' to quit the game.");  
         }
-
+        
+           
         /// <summary>
         /// Asks for a command.
         /// </summary>
