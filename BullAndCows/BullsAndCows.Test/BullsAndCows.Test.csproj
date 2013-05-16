@@ -53,8 +53,9 @@
     <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GeneratorTests.cs" />
-    <Compile Include="ScoreBoardTest.cs" />
+    <Compile Include="ScoreBoardTests.cs" />
     <Compile Include="ConsolePrinterTests.cs" />
+    <Compile Include="BullsAndCowsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BullsAndCows\BullsAndCows.csproj">
