@@ -119,19 +119,20 @@ namespace BullsAndCows
 
         private bool IsCommand(string input)
         {
+            //check input
             if (input == null || input.Length == 0)
             {
                 return false;
             }
 
-            string uppedFirstChar = string.Empty;
+            string uppedFirstCharWord = string.Empty;
             if (char.IsLower(input[0]))
             {
-                uppedFirstChar = char.ToUpper(input[0]).ToString() + input.Substring(1);
+                uppedFirstCharWord = char.ToUpper(input[0]).ToString() + input.Substring(1);
             }
 
             Command newCommand;
-            bool isCommand = Enum.TryParse(uppedFirstChar, out newCommand);
+            bool isCommand = Enum.TryParse(uppedFirstCharWord, out newCommand);
 
             if (isCommand)
             {
