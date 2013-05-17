@@ -1,4 +1,10 @@
-﻿namespace BullsAndCows
+﻿//-----------------------------------------------------------------------
+// <copyright file="GameEngine.cs" company="Team Osmium">
+//     All rights reserved © Team Osmium 2013
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace BullsAndCows
 {
     using System;
     using System.Text.RegularExpressions;
@@ -8,6 +14,10 @@
     /// </summary>
     public class GameEngine
     {
+        // TODO: Documentation for fields
+        /// <summary>
+        /// 
+        /// </summary>
         private const int MaxHelpsCount = 5;
         private const int SecretNumberLength = 4;
 
@@ -21,13 +31,13 @@
         private bool exitFromGame;
         
         /// <summary>
-        /// Initializes a new instance of GameEngine class.
+        /// Initializes a new instance of the <see cref="GameEngine"/> class.
         /// </summary>
         public GameEngine()
         {
             this.scoreBoard = new ScoreBoard();
             this.consolePrinter = new ConsolePrinter();
-            this.secretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
+            this.secretNumber = Generator.SecretNumber(SecretNumberLength);   
             this.attemptsCount = 0;
             this.helpsCount = 0;
             this.exitFromGame = false;
@@ -95,7 +105,7 @@
             this.consolePrinter.Clear();
             this.consolePrinter.PrintWelcomeMessage();
 
-            this.secretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
+            this.secretNumber = Generator.SecretNumber(SecretNumberLength);   
             this.attemptsCount = 0;
             this.helpsCount = 0;
         } 

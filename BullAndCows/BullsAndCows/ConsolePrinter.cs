@@ -1,4 +1,10 @@
-﻿namespace BullsAndCows
+﻿//-----------------------------------------------------------------------
+// <copyright file="ConsolePrinter.cs" company="Team Osmium">
+//     All rights reserved © Team Osmium 2013
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace BullsAndCows
 {
     using System;
 
@@ -15,7 +21,6 @@
             Console.WriteLine("Welcome to “Bulls and Cows” game. Please try to guess my secret 4-digit number.");
             Console.WriteLine("Use 'top' to view the top scoreboard, 'restart' to start a new game and 'help' to cheat and 'exit' to quit the game.");  
         }
-        
            
         /// <summary>
         /// Asks for a command.
@@ -53,6 +58,7 @@
             Console.WriteLine("The number looks like {0}.", helpNumber);
         }
 
+        // TODO: Empty param tags
         /// <summary>
         /// Prints how many times (of the max possible) the player revealed a digit.
         /// </summary>
@@ -96,10 +102,11 @@
             Console.WriteLine("Please, write your nickname, because you will be added to the scoreboard.");
         }
 
+        // TODO: Empty param tag
         /// <summary>
         /// Prints the Score board to the console.
         /// </summary>
-        /// <param name="ScoreBoard"></param>
+        /// <param name="scoreBoard"></param>
         public void PrintScoreBoard(ScoreBoard scoreBoard)
         {
             Console.WriteLine(scoreBoard);

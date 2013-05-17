@@ -1,4 +1,10 @@
-﻿namespace BullsAndCows
+﻿//-----------------------------------------------------------------------
+// <copyright file="Generator.cs" company="Team Osmium">
+//     All rights reserved © Team Osmium 2013
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace BullsAndCows
 {
     using System;
 
@@ -7,7 +13,9 @@
     /// </summary>
     public static class Generator
     {
-        private static Random randomNumberGenerator = new Random();
+        private static readonly Random randomNumberGenerator = new Random();
+
+        // TODO: Add exceptions
 
         /// <summary>
         /// Generates a random number with a specific length.

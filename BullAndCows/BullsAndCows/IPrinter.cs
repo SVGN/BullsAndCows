@@ -1,4 +1,10 @@
-﻿namespace BullsAndCows
+﻿//-----------------------------------------------------------------------
+// <copyright file="IPrinter.cs" company="Team Osmium">
+//     All rights reserved © Team Osmium 2013
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace BullsAndCows
 {
     /// <summary>
     /// The interface includes messages which will be used ingame.

@@ -1,8 +1,8 @@
 ﻿namespace BullsAndCows.Test
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Text;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ScoreBoardTests

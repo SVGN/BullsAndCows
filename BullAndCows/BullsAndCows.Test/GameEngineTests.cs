@@ -1,12 +1,11 @@
 ﻿namespace BullsAndCows.Test
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.IO;
-    using System.Text;
     using System.Reflection;
-    using System.Collections.Generic;
-
+    using System.Text;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    
     [TestClass]
     public class GameEngineTests
     {
@@ -20,7 +19,6 @@
             Assert.AreEqual(0, actualAttemptsCount);
             Assert.AreEqual(0, actualHelpsCount);
             Assert.AreEqual(false, actualExitFromGame);
-
         }
 
         [TestMethod]
@@ -28,7 +26,7 @@
         {
             GameEngine gameEngine = new GameEngine();
             typeof(GameEngine).GetMethod("ReadAction", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(gameEngine, new object[] { "exit" });
-            Command actual = (Command)(typeof(GameEngine).GetField("currentCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(gameEngine));
+            Command actual = (Command)typeof(GameEngine).GetField("currentCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(gameEngine);
             Command expected = Command.Exit;
             Assert.AreEqual(expected, actual);
         }
@@ -38,7 +36,7 @@
         {
             GameEngine gameEngine = new GameEngine();
             typeof(GameEngine).GetMethod("ReadAction", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(gameEngine, new object[] { "restart" });
-            Command actual = (Command)(typeof(GameEngine).GetField("currentCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(gameEngine));
+            Command actual = (Command)typeof(GameEngine).GetField("currentCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(gameEngine);
             Command expected = Command.Restart;
             Assert.AreEqual(expected, actual);
         }
@@ -48,7 +46,7 @@
         {
             GameEngine gameEngine = new GameEngine();
             typeof(GameEngine).GetMethod("ReadAction", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(gameEngine, new object[] { "top" });
-            Command actual = (Command)(typeof(GameEngine).GetField("currentCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(gameEngine));
+            Command actual = (Command)typeof(GameEngine).GetField("currentCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(gameEngine);
             Command expected = Command.Top;
             Assert.AreEqual(expected, actual);
         }
@@ -58,7 +56,7 @@
         {
             GameEngine gameEngine = new GameEngine();
             typeof(GameEngine).GetMethod("ReadAction", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(gameEngine, new object[] { "help" });
-            Command actual = (Command)(typeof(GameEngine).GetField("currentCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(gameEngine));
+            Command actual = (Command)typeof(GameEngine).GetField("currentCommand", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(gameEngine);
             Command expected = Command.Help;
             Assert.AreEqual(expected, actual);
         }

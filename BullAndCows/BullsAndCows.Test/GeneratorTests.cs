@@ -16,16 +16,20 @@
                 randomNumbers[i] = Generator.SecretNumber(4);
             }
 
-            //We will check whether we have at least 2 different numbers in the array.
+            // We will check whether we have at least 2 different numbers in the array.
             bool hasDifferentNumbers = false;
             for (int i = 1; i < randomNumbers.Length; i++)
             {
                 if (randomNumbers[0] != randomNumbers[i])
+                {
                     hasDifferentNumbers = true;
+                }
             }
 
             if (!hasDifferentNumbers)
-                Assert.Fail("The generated numbers are not random.");                
+            {
+                Assert.Fail("The generated numbers are not random.");
+            }
         }
 
         [TestMethod]
@@ -38,16 +42,20 @@
                 indexes[i] = Generator.HelpIndex();
             }
 
-            //We will check whether we have at least 2 different indexes in the array.
+            // We will check whether we have at least 2 different indexes in the array.
             bool hasDifferentIndexes = false;
             for (int i = 1; i < indexes.Length; i++)
             {
                 if (indexes[0] != indexes[i])
+                {
                     hasDifferentIndexes = true;
+                }
             }
 
             if (!hasDifferentIndexes)
+            {
                 Assert.Fail("The generated indexes are not random.");
+            }
         }
 
         [TestMethod]

@@ -1,8 +1,8 @@
 ﻿namespace BullsAndCows.Test
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.IO;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ConsolePrinterTests
@@ -12,7 +12,7 @@
         [TestInitialize]
         public void TestInitialize()
         {
-            consolePrinter = new ConsolePrinter();
+            this.consolePrinter = new ConsolePrinter();
         }
 
         [TestMethod]
@@ -20,17 +20,17 @@
         {
             try
             {
-                consolePrinter.PrintWelcomeMessage();
-                consolePrinter.PrintGuessOrCommandAskingMessage();
-                consolePrinter.PrintWrongGuessOrCommandMessage();
-                consolePrinter.PrintFailedGuessMessage(2, 3);
-                consolePrinter.PrintHelpNumberMessage("X1X2");     
-                consolePrinter.PrintRemainingHelpsMessage(5, 3);
-                consolePrinter.PrintForbiddenHelpMessage();
-                consolePrinter.PrintResultMessage(19);
-                consolePrinter.PrintUnsavedResultMessage();
-                consolePrinter.PrintNicknameMessage();
-                consolePrinter.PrintScoreBoard(new ScoreBoard());
+                this.consolePrinter.PrintWelcomeMessage();
+                this.consolePrinter.PrintGuessOrCommandAskingMessage();
+                this.consolePrinter.PrintWrongGuessOrCommandMessage();
+                this.consolePrinter.PrintFailedGuessMessage(2, 3);
+                this.consolePrinter.PrintHelpNumberMessage("X1X2");
+                this.consolePrinter.PrintRemainingHelpsMessage(5, 3);
+                this.consolePrinter.PrintForbiddenHelpMessage();
+                this.consolePrinter.PrintResultMessage(19);
+                this.consolePrinter.PrintUnsavedResultMessage();
+                this.consolePrinter.PrintNicknameMessage();
+                this.consolePrinter.PrintScoreBoard(new ScoreBoard());
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintWelcomeMessage();
+                this.consolePrinter.PrintWelcomeMessage();
                 string actual = sw.ToString();
                 string expected = string.Format("{0}{1}{2}{3}",
                     "Welcome to “Bulls and Cows” game. Please try to guess my secret 4-digit number.",
@@ -61,7 +61,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintGuessOrCommandAskingMessage();
+                this.consolePrinter.PrintGuessOrCommandAskingMessage();
                 string actual = sw.ToString();
                 string expected = string.Format("Enter your guess or command: {0}", Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -74,7 +74,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintWrongGuessOrCommandMessage();
+                this.consolePrinter.PrintWrongGuessOrCommandMessage();
                 string actual = sw.ToString();
                 string expected = string.Format("{0}{1}{2}{3}",
                     "Please enter a 4-digit number or",
@@ -91,7 +91,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintFailedGuessMessage(2, 3);
+                this.consolePrinter.PrintFailedGuessMessage(2, 3);
                 string actual = sw.ToString();
                 string expected = string.Format("Wrong number! Bulls: {0}, Cows: {1}{2}", 2, 3, Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -104,7 +104,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintHelpNumberMessage("X12X");
+                this.consolePrinter.PrintHelpNumberMessage("X12X");
                 string actual = sw.ToString();
                 string expected = string.Format("The number looks like {0}.{1}", "X12X", Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -117,7 +117,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintRemainingHelpsMessage(5, 3);
+                this.consolePrinter.PrintRemainingHelpsMessage(5, 3);
                 string actual = sw.ToString();
                 string expected = string.Format("You used {0} helps from {1} possible helps{2}", 3, 5, Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -130,7 +130,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintForbiddenHelpMessage();
+                this.consolePrinter.PrintForbiddenHelpMessage();
                 string actual = sw.ToString();
                 string expected = string.Format("You can't use more helps!{0}", Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -143,7 +143,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintResultMessage(25);
+                this.consolePrinter.PrintResultMessage(25);
                 string actual = sw.ToString();
                 string expected = string.Format("Congratulations! You guessed the secret number in {0} attempts.{1}", 25, Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -156,7 +156,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintUnsavedResultMessage();
+                this.consolePrinter.PrintUnsavedResultMessage();
                 string actual = sw.ToString();
                 string expected = string.Format("You used cheat in this game to this you will not be added to the scoreboard.{0}", Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -169,7 +169,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintNicknameMessage();
+                this.consolePrinter.PrintNicknameMessage();
                 string actual = sw.ToString();
                 string expected = string.Format("Please, write your nickname, because you will be added to the scoreboard.{0}", Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -186,7 +186,7 @@
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.PrintScoreBoard(scoreBoard);
+                this.consolePrinter.PrintScoreBoard(scoreBoard);
                 string actual = sw.ToString();
                 string expected = string.Format("{0}{1}", scoreBoard.ToString(), Environment.NewLine);
                 Assert.AreEqual(expected, actual);
@@ -194,13 +194,13 @@
         }
 
         [TestMethod]
-        //[ExpectedException(typeof(IOException))]
+        // [ExpectedException(typeof(IOException))]
         public void ConsolePrinterClearTest()
         {
             using (StringWriter sw = new StringWriter())
             {
                 Console.SetOut(sw);
-                consolePrinter.Clear();
+                this.consolePrinter.Clear();
                 string actual = sw.ToString();
                 string expected = string.Empty;
                 Assert.AreEqual(expected, actual);

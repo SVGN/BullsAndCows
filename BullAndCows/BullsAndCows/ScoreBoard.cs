@@ -1,4 +1,10 @@
-﻿namespace BullsAndCows
+﻿//-----------------------------------------------------------------------
+// <copyright file="ScoreBoard.cs" company="Team Osmium">
+//     All rights reserved © Team Osmium 2013
+// </copyright>
+//-----------------------------------------------------------------------
+
+namespace BullsAndCows
 {
     using System;
     using System.Collections.Generic;
@@ -10,21 +16,30 @@
     /// </summary>
     public class ScoreBoard
     {
-        private List<Player> ranking = new List<Player>();
-        private ReadOnlyCollection<Player> rankingsReadonly;
         public const int PlayersToShow = 5;
 
+        private readonly List<Player> ranking = new List<Player>();
+        private readonly ReadOnlyCollection<Player> rankingsReadonly; 
+
+        // TODO: Documentation
+        /// <summary>
+        /// 
+        /// </summary>
+        public ScoreBoard()
+        {
+            this.rankingsReadonly = new ReadOnlyCollection<Player>(this.ranking);
+        }
+
+        // TODO: Documentation
+        /// <summary>
+        /// 
+        /// </summary>
         public ReadOnlyCollection<Player> Ranking
         {
             get
             {
                 return this.rankingsReadonly;
             }
-        }
-
-        public ScoreBoard()
-        {
-            this.rankingsReadonly = new ReadOnlyCollection<Player>(this.ranking);
         }
 
         /// <summary>
