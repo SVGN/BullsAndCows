@@ -14,10 +14,6 @@ namespace BullsAndCows
     /// </summary>
     public class GameEngine
     {
-        // TODO: Documentation for fields
-        /// <summary>
-        /// 
-        /// </summary>
         private const int MaxHelpsCount = 5;
         private const int SecretNumberLength = 4;
 

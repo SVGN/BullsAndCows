@@ -53,6 +53,7 @@
 - HelpIndexTest() - тест дали за N на брой извиквания, където N е дължината на числото, методът ще върно поне една двойка
 различни индекси.
 - HelpNumberTest() - тест дали за определено число и индекс се разкрива правилната цифра.
+- HelpNumberOutOfRangeTest() - тест дали методът хвърля IndexOutOfRange exception при подаване на грешен индекс.
 
 3.PlayerTests
 - Тестове за невалидно име (null, String.Empty, Whitespace name).

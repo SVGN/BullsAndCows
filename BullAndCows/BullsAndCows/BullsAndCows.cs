@@ -6,14 +6,13 @@
 
 namespace BullsAndCows
 {
-    // TODO: Documentation
     /// <summary>
-    /// 
+    /// Bulls and cows main class.
     /// </summary>
     public class BullsAndCows
     {
         /// <summary>
-        /// 
+        /// Bulls and cows main method.
         /// </summary>
         public static void Main()
         {

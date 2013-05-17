@@ -15,8 +15,6 @@ namespace BullsAndCows
     {
         private static readonly Random randomNumberGenerator = new Random();
 
-        // TODO: Add exceptions
-
         /// <summary>
         /// Generates a random number with a specific length.
         /// </summary>
@@ -55,6 +53,11 @@ namespace BullsAndCows
         /// <returns>The digit's value at the specified position</returns>
         public static string HelpNumber(string secretNumber, int helpIndex)
         {
+            if (helpIndex >= secretNumber.Length || helpIndex < 0)
+            {
+                throw new IndexOutOfRangeException("Help index is out of range");
+            }
+
             const char HiddenDigits = 'X';
             char[] helpNumber = new char[secretNumber.Length];
 

@@ -69,5 +69,13 @@
             Assert.AreNotEqual(result[helpIndex], 'X');
             Assert.AreEqual(result, "XX3X");
         }
+
+        [TestMethod, ExpectedException(typeof(IndexOutOfRangeException))]
+        public void HelpNumberOutOfRangeTest()
+        {
+            string secretNumber = "1234";
+            int helpIndex = 4;
+            string result = Generator.HelpNumber(secretNumber, helpIndex);
+        }
     }
 }

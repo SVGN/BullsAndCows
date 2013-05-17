@@ -58,12 +58,11 @@ namespace BullsAndCows
             Console.WriteLine("The number looks like {0}.", helpNumber);
         }
 
-        // TODO: Empty param tags
         /// <summary>
         /// Prints how many times (of the max possible) the player revealed a digit.
         /// </summary>
-        /// <param name="maxHelps"></param>
-        /// <param name="usedHelps"></param>
+        /// <param name="maxHelps">Max possible helps.</param>
+        /// <param name="usedHelps">Actual helps.</param>
         public void PrintRemainingHelpsMessage(int maxHelps, int usedHelps)
         {
             Console.WriteLine("You used {0} helps from {1} possible helps", usedHelps, maxHelps);
@@ -102,11 +101,10 @@ namespace BullsAndCows
             Console.WriteLine("Please, write your nickname, because you will be added to the scoreboard.");
         }
 
-        // TODO: Empty param tag
         /// <summary>
         /// Prints the Score board to the console.
         /// </summary>
-        /// <param name="scoreBoard"></param>
+        /// <param name="scoreBoard">ScoreBoard instance.</param>
         public void PrintScoreBoard(ScoreBoard scoreBoard)
         {
             Console.WriteLine(scoreBoard);

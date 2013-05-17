@@ -21,18 +21,16 @@ namespace BullsAndCows
         private readonly List<Player> ranking = new List<Player>();
         private readonly ReadOnlyCollection<Player> rankingsReadonly; 
 
-        // TODO: Documentation
         /// <summary>
-        /// 
+        /// Initializes a new instance of ScoreBoard class.
         /// </summary>
         public ScoreBoard()
         {
             this.rankingsReadonly = new ReadOnlyCollection<Player>(this.ranking);
         }
 
-        // TODO: Documentation
         /// <summary>
-        /// 
+        /// Gets a readonly collection of the current ranking.
         /// </summary>
         public ReadOnlyCollection<Player> Ranking
         {

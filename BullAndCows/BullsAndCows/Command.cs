@@ -11,14 +11,24 @@ namespace BullsAndCows
     /// </summary>
     public enum Command
     {
-        // TODO: Add documentation for each element
-
         /// <summary>
-        /// 
+        /// Show Top 5 players on the Scoreboard.
         /// </summary>
         Top, 
+
+        /// <summary>
+        /// Restart the game.
+        /// </summary>
         Restart, 
+        
+        /// <summary>
+        /// Get help ingame.
+        /// </summary>
         Help, 
+
+        /// <summary>
+        /// Exit game.
+        /// </summary>
         Exit
     }
 }
