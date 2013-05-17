@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text;
-
-namespace BullsAndCows.Test
+﻿namespace BullsAndCows.Test
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Text;
+
     [TestClass]
     public class ScoreBoardTests
     {

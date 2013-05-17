@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-
-namespace BullsAndCows.Test
+﻿namespace BullsAndCows.Test
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.IO;
+
     [TestClass]
     public class ConsolePrinterTests
     {

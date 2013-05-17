@@ -8,29 +8,29 @@
     /// </summary>
     public class GameEngine
     {
-        public const int MaxHelpsCount = 5;
-        public const int SecretNumberLength = 4;
+        private const int MaxHelpsCount = 5;
+        private const int SecretNumberLength = 4;
 
-        public readonly ScoreBoard ScoreBoard;
-        public readonly IPrinter ConsolePrinter;
+        private readonly ScoreBoard scoreBoard;
+        private readonly IPrinter consolePrinter;
 
-        public Command CurrentCommand { get; private set; }
-        public string SecretNumber { get; private set; }
-        public int AttemptsCount { get; private set; }
-        public int HelpsCount { get; private set; }
-        public bool ExitFromGame { get; private set; }
+        private Command currentCommand;
+        private string secretNumber;
+        private int attemptsCount;
+        private int helpsCount;
+        private bool exitFromGame;
         
         /// <summary>
         /// Initializes a new instance of GameEngine class.
         /// </summary>
         public GameEngine()
         {
-            this.ScoreBoard = new ScoreBoard();
-            this.ConsolePrinter = new ConsolePrinter();
-            this.SecretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
-            this.AttemptsCount = 0;
-            this.HelpsCount = 0;
-            this.ExitFromGame = false;
+            this.scoreBoard = new ScoreBoard();
+            this.consolePrinter = new ConsolePrinter();
+            this.secretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
+            this.attemptsCount = 0;
+            this.helpsCount = 0;
+            this.exitFromGame = false;
         }
 
         /// <summary>
@@ -38,17 +38,17 @@
         /// </summary>
         public void Run()
         {
-            this.ConsolePrinter.PrintWelcomeMessage();
+            this.consolePrinter.PrintWelcomeMessage();
 
-            while (!this.ExitFromGame)
+            while (!this.exitFromGame)
             {
-                this.ConsolePrinter.PrintGuessOrCommandAskingMessage();
+                this.consolePrinter.PrintGuessOrCommandAskingMessage();
                 string input = Console.ReadLine().Trim();
                 this.ReadAction(input);
             }
         }
 
-        public void ReadAction(string input)
+        private void ReadAction(string input)
         {
             if (this.IsGuess(input))
             {
@@ -57,11 +57,11 @@
             }
             else if (this.IsCommand(input))
             {
-                switch (this.CurrentCommand)
+                switch (this.currentCommand)
                 {
                     case Command.Top:
                         {
-                            this.ConsolePrinter.PrintScoreBoard(this.ScoreBoard);
+                            this.consolePrinter.PrintScoreBoard(this.scoreBoard);
                             break;
                         }
 
@@ -79,30 +79,30 @@
 
                     case Command.Exit:
                         {
-                            this.ExitFromGame = true;
+                            this.exitFromGame = true;
                             break;
                         }
                 }
             }
             else
             {
-                this.ConsolePrinter.PrintWrongGuessOrCommandMessage();
+                this.consolePrinter.PrintWrongGuessOrCommandMessage();
             }
         }
 
         private void StartNewGame()
         {
-            this.ConsolePrinter.Clear();
-            this.ConsolePrinter.PrintWelcomeMessage();
+            this.consolePrinter.Clear();
+            this.consolePrinter.PrintWelcomeMessage();
 
-            this.SecretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
-            this.AttemptsCount = 0;
-            this.HelpsCount = 0;
+            this.secretNumber = "8130";// Generator.SecretNumber(SecretNumberLength);   
+            this.attemptsCount = 0;
+            this.helpsCount = 0;
         } 
 
         private bool IsGuess(string input)
         {
-            if (input == null || input.Length != 4)
+            if (input == null || input.Length != SecretNumberLength)
             {
                 return false;
             }
@@ -129,7 +129,7 @@
 
             if (isCommand)
             {
-                this.CurrentCommand = newCommand;
+                this.currentCommand = newCommand;
             }
 
             return isCommand;
@@ -137,27 +137,43 @@
 
         private void Help()
         {
-            if (this.HelpsCount >= MaxHelpsCount)
+            if (this.helpsCount >= MaxHelpsCount)
             {
-                this.ConsolePrinter.PrintForbiddenHelpMessage();
+                this.consolePrinter.PrintForbiddenHelpMessage();
                 return;
             }
 
-            this.HelpsCount++;
+            this.helpsCount++;
 
             int helpIndex = Generator.HelpIndex();
-            string helpNumber = Generator.HelpNumber(this.SecretNumber, helpIndex);
-            this.ConsolePrinter.PrintHelpNumberMessage(helpNumber);
-            this.ConsolePrinter.PrintRemainingHelpsMessage(MaxHelpsCount, this.HelpsCount);
+            string helpNumber = Generator.HelpNumber(this.secretNumber, helpIndex);
+            this.consolePrinter.PrintHelpNumberMessage(helpNumber);
+            this.consolePrinter.PrintRemainingHelpsMessage(MaxHelpsCount, this.helpsCount);
         }
 
         private void ProcessGuess(string guessNumber)
         {
-            this.AttemptsCount++;
+            this.attemptsCount++;
 
-            if (guessNumber == this.SecretNumber)
+            if (guessNumber == this.secretNumber)
             {
-                this.AddResultToScoreBoard();
+                this.consolePrinter.PrintResultMessage(this.attemptsCount);
+
+                if (this.helpsCount > 0)
+                {
+                    this.consolePrinter.PrintUnsavedResultMessage();
+                    Console.ReadLine();
+
+                    this.StartNewGame();
+                    return;
+                }
+
+                this.consolePrinter.PrintNicknameMessage();
+                string nickname = Console.ReadLine().Trim();
+                this.AddResultToScoreBoard(nickname, this.attemptsCount);
+                Console.ReadLine();
+
+                this.StartNewGame();
             }
             else
             {
@@ -168,7 +184,7 @@
                 bool[] isBull = new bool[SecretNumberLength];
                 for (int i = 0; i < SecretNumberLength; i++)
                 {
-                    if (this.SecretNumber[i] == guessNumber[i])
+                    if (this.secretNumber[i] == guessNumber[i])
                     {
                         isBull[i] = true;
                         bulls++;
@@ -181,7 +197,7 @@
                 {
                     for (int j = 0; j < SecretNumberLength; j++)
                     {
-                        if (!isBull[j] && !isCow[j] && (guessNumber[i] == this.SecretNumber[j]))
+                        if (!isBull[j] && !isCow[j] && (guessNumber[i] == this.secretNumber[j]))
                         {
                             isCow[j] = true;
                             cows++;         
@@ -190,32 +206,15 @@
                     }
                 }
 
-                this.ConsolePrinter.PrintFailedGuessMessage(bulls, cows);
+                this.consolePrinter.PrintFailedGuessMessage(bulls, cows);
             }
         }
 
-        private void AddResultToScoreBoard()
+        private void AddResultToScoreBoard(string nickname, int attempts)
         {
-            this.ConsolePrinter.PrintResultMessage(this.AttemptsCount);
-
-            if (this.HelpsCount > 0)
-            {
-                this.ConsolePrinter.PrintUnsavedResultMessage();
-                Console.ReadLine();
-
-                this.StartNewGame();
-                return;
-            }
-
-            this.ConsolePrinter.PrintNicknameMessage();
-            string nickname = Console.ReadLine();
-            
-            Player player = new Player(nickname, this.AttemptsCount);
-            this.ScoreBoard.AddPlayer(player);
-            this.ConsolePrinter.PrintScoreBoard(this.ScoreBoard);
-            Console.ReadLine();
-
-            this.StartNewGame();
+            Player player = new Player(nickname, attempts);
+            this.scoreBoard.AddPlayer(player);
+            this.consolePrinter.PrintScoreBoard(this.scoreBoard);
         }
     }
 }
